@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import { productRouter } from './controllers';
+import { categoryRouter, productRouter } from './controllers';
 
 // tslint:disable-next-line:no-var-requires
 const appInfo = require('../package.json');
@@ -31,5 +31,6 @@ router.get('/health-check', (req, res) => {
 });
 
 router.use('/product', productRouter);
+router.use('/category', categoryRouter);
 
 export default router;

@@ -1,5 +1,6 @@
 import {
   BadRequestError,
+  DuplicateKeyError,
   NotFoundError,
   UnprocessableError,
 } from '../../entities/errors';
@@ -20,6 +21,9 @@ export default function errorHandler(env: string) {
 
     let response: IResponse;
     switch (err.type) {
+      case DuplicateKeyError.name:
+        response = new UnprocessableResponse(err.data, err.message);
+        break;
       case UnprocessableError.name:
         response = new UnprocessableResponse(err.data, err.message);
         break;

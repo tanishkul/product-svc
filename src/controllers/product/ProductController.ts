@@ -23,9 +23,58 @@ class ProductController {
   public async getProducts(req: Request, res: Response, next: NextFunction) {
     try {
       const result =
-        await ProductController.getInstance().productService.getProducts({
+        await ProductController.getInstance().productService.getAllProducts({
         });
-      return res.send(successHandler(SUCCESS_MSG.FETCH_SLOTS, result));
+      return res.send(successHandler(SUCCESS_MSG.FETCH, result));
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  public async getProductsOfSubCategory(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { id } = req.params;
+      const result =
+        await ProductController.getInstance().productService.getAllProducts({
+          categoryId: id,
+        });
+      if (!result.length) {
+          return res.send(
+            successHandler('No product exists with this sub-category id!', []),
+          );
+        }
+      return res.send(successHandler(SUCCESS_MSG.FETCH, result));
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  public async getProductsOfCategory(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { id } = req.params;
+      const result =
+        await ProductController.getInstance().productService.getProductsOfCategory({
+          categoryId: id,
+        });
+      if (!result.length) {
+          return res.send(
+            successHandler('No product exists with this category id!', []),
+          );
+        }
+      return res.send(successHandler(SUCCESS_MSG.FETCH, result));
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  public async createProduct(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { name, categoryId } =  req.body;
+      const result =
+        await ProductController.getInstance().productService.create({
+          categoryId, name,
+        });
+      return res.send(successHandler(SUCCESS_MSG.CREATE, result));
     } catch (error) {
       next(error);
     }

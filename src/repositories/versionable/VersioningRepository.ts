@@ -14,15 +14,23 @@ export default class VersionableRepository<
 
   public async create(options: IQueryBaseCreate): Promise<D> {
     console.log('BaseRepository - create:', JSON.stringify(options));
-    const id = generateObjectId();
+    try {
+      const id = generateObjectId();
 
-    const result = await this.modelType.create({
-      ...options,
-      _id: id,
-      originalId: id,
-    });
+      const result = await this.modelType.create({
+        ...options,
+        _id: id,
+        originalId: id,
+      });
 
-    return this.assignId(leanObject(result.toObject()));
+      return this.assignId(leanObject(result.toObject()));
+    } catch (e) {
+      console.error('Error in create', e);
+      throw {
+        message: 'duplicate key error',
+        type: 'DuplicateKeyError',
+      };
+    }
   }
 
   protected async getAll(query: any = {}, options: any = {}): Promise<D[]> {

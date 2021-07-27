@@ -13,4 +13,25 @@ router
     productController.getProducts,
   );
 
+router
+  .route('/category/:id')
+  .get(
+    ...validationHandler(validation.getProducts),
+    productController.getProductsOfCategory,
+  );
+
+router
+  .route('/subcategory/:id')
+  .get(
+    ...validationHandler(validation.getProducts),
+    productController.getProductsOfSubCategory,
+  );
+
+router
+  .route('/')
+  .post(
+    // ...validationHandler(validation.getProducts),
+    productController.createProduct,
+  );
+
 export default router;

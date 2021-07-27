@@ -1,7 +1,8 @@
 import IVersionableDocument from '../../versionable/IVersionableDocument';
 
-export default interface IProductModel extends IVersionableDocument {
+export default interface ICategoryModel extends IVersionableDocument {
   id: string;
   name: string;
-  categoryId: string;
+  parentId: string;
+  level: number;
 }

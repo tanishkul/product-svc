@@ -1,19 +1,20 @@
 import VersionableSchema from '../../versionable/VersionableSchema';
 
-export default class ProductSchema extends VersionableSchema {
+export default class CategorySchema extends VersionableSchema {
   constructor(options: any, collections: any) {
     const baseSchema = {
       ...options,
-      categoryId: {
-        required: true,
-        type: String,
-      },
       id: {
         required: false,
         type: String,
       },
       name: {
         required: true,
+        type: String,
+      },
+      parentId: {
+        default: undefined,
+        required: false,
         type: String,
       },
     };

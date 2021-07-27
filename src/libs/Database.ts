@@ -8,7 +8,7 @@ export default class Database {
     return new Promise((resolve, reject) => {
       // Mongoose options
       const options = {
-        autoIndex: false, // Don't build indexes
+        autoIndex: true, // Don't build indexes
         bufferMaxEntries: 0,
         keepAlive: true,
         poolSize: 10, // Maintain up to 10 socket connections
