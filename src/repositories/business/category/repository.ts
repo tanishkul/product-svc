@@ -16,9 +16,4 @@ export default class CategoryRepository extends VersioningRepository<
     console.log('Category - Get query: ', options);
     return super.getAll(options, {});
   }
-
-  public async aggregateFunction(options: any): Promise<ICategoryModel[]> {
-    console.log('Category - Get query: ', options);
-    return super.getAll(options, {});
-  }
 }

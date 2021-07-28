@@ -10,7 +10,7 @@ const getSubCategories = {
       options: (id: string) => isValidObjectId(id),
     },
     exists: {
-      errorMessage: 'Please Provide id',
+      errorMessage: 'Please provide id',
     },
     in: [RequestParameter.PARAMS],
   },
@@ -19,7 +19,7 @@ const getSubCategories = {
 const createCategory = {
   name: {
     exists: {
-      errorMessage: 'Please Provide category name!',
+      errorMessage: 'Please provide category name!',
     },
     in: [RequestParameter.BODY],
   },

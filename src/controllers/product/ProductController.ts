@@ -23,15 +23,18 @@ class ProductController {
   public async getProducts(req: Request, res: Response, next: NextFunction) {
     try {
       const result =
-        await ProductController.getInstance().productService.getAllProducts({
-        });
+        await ProductController.getInstance().productService.getAllProducts({});
       return res.send(successHandler(SUCCESS_MSG.FETCH, result));
     } catch (error) {
       next(error);
     }
   }
 
-  public async getProductsOfSubCategory(req: Request, res: Response, next: NextFunction) {
+  public async getProductsOfSubCategory(
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ) {
     try {
       const { id } = req.params;
       const result =
@@ -39,28 +42,34 @@ class ProductController {
           categoryId: id,
         });
       if (!result.length) {
-          return res.send(
-            successHandler('No product exists with this sub-category id!', []),
-          );
-        }
+        return res.send(
+          successHandler('No product exists with this sub-category id!', []),
+        );
+      }
       return res.send(successHandler(SUCCESS_MSG.FETCH, result));
     } catch (error) {
       next(error);
     }
   }
 
-  public async getProductsOfCategory(req: Request, res: Response, next: NextFunction) {
+  public async getProductsOfCategory(
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ) {
     try {
       const { id } = req.params;
       const result =
-        await ProductController.getInstance().productService.getProductsOfCategory({
-          categoryId: id,
-        });
+        await ProductController.getInstance().productService.getProductsOfCategory(
+          {
+            categoryId: id,
+          },
+        );
       if (!result.length) {
-          return res.send(
-            successHandler('No product exists with this category id!', []),
-          );
-        }
+        return res.send(
+          successHandler('No product exists with this category id!', []),
+        );
+      }
       return res.send(successHandler(SUCCESS_MSG.FETCH, result));
     } catch (error) {
       next(error);
@@ -69,10 +78,11 @@ class ProductController {
 
   public async createProduct(req: Request, res: Response, next: NextFunction) {
     try {
-      const { name, categoryId } =  req.body;
+      const { name, categoryId } = req.body;
       const result =
         await ProductController.getInstance().productService.create({
-          categoryId, name,
+          categoryId,
+          name,
         });
       return res.send(successHandler(SUCCESS_MSG.CREATE, result));
     } catch (error) {

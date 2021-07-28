@@ -16,21 +16,21 @@ router
 router
   .route('/category/:id')
   .get(
-    ...validationHandler(validation.getProducts),
+    ...validationHandler(validation.getProductsOfCategory),
     productController.getProductsOfCategory,
   );
 
 router
   .route('/subcategory/:id')
   .get(
-    ...validationHandler(validation.getProducts),
+    ...validationHandler(validation.getProductsOfCategory),
     productController.getProductsOfSubCategory,
   );
 
 router
   .route('/')
   .post(
-    // ...validationHandler(validation.getProducts),
+    ...validationHandler(validation.createProducts),
     productController.createProduct,
   );
 
